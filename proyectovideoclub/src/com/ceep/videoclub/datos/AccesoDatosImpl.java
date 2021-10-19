@@ -1,31 +1,37 @@
 
 package com.ceep.videoclub.datos;
 
+import com.ceep.videoclub.dominio.Pelicula;
+import java.util.*;
 
-public class AccesoDatosImpl {
-    
-    //metodos EXISTE (String): boolean y LISTAR
-    
-    public boolean existe(String nombreArchivo){
-        var a=0;
-        return true;
+
+public class AccesoDatosImpl implements IAccesoDatos{
+
+    @Override
+    public boolean existe(String nombreArchivo) {
+        return true; 
+    }
+
+    @Override
+    public List<Pelicula> listar(String nombreArchivo) {
+        List<Pelicula> peliculas = new ArrayList<>();
+        return peliculas;
+    }
+
+    @Override
+    public void escribir(boolean anexar) {
+
+    }
+
+    @Override
+    public String crear(String nombreArchivo) {
+        return "";
+    }
+
+    @Override
+    public String buscar(String nombreArchivo) {
+        return "";
     }
     
-    public String listar(String nombreArchivo){
-        //array List películar
-        return nombreArchivo;
-    }
-    
-    public void escribir(boolean anexar){
-        
-    }
-    
-    public String crear(String nombreArchivo){
-        //
-        return nombreArchivo;
-    }
-    public String buscar(String nombreArchivo){
-        //
-        return nombreArchivo;
-    }
+   
 }

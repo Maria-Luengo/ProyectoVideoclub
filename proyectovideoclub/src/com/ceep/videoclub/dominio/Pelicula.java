@@ -1,6 +1,4 @@
-
 package com.ceep.videoclub.dominio;
-
 
 public class Pelicula {
     
