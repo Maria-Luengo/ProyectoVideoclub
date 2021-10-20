@@ -1,5 +1,5 @@
 
-package com.ceep.videoclub.negocio.catalogoPeliculas;
+package com.ceep.videoclub.negocio;
 
 public interface ICatalogoPelicula {
     

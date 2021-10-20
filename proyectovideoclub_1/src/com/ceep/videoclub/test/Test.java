@@ -23,7 +23,7 @@ public class Test {
         
         switch(opcion){
             case 1:
-                
+                System.out.println("Hola");
                 break;
             case 2:
                 
