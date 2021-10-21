@@ -6,13 +6,15 @@ import com.ceep.videoclub.excepciones.AccesoDatosEx;
 import com.ceep.videoclub.excepciones.EscrituraDatosEx;
 import com.ceep.videoclub.excepciones.LecturaDatosEx;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.*;
+
 /*import java.util.logging.Level;
 import java.util.logging.Logger;*/
 
-/*import java.util.logging.Level; NO LOS VAMOS A USAR
+ /*import java.util.logging.Level; NO LOS VAMOS A USAR
 import java.util.logging.Logger;*/
-
 public class CatalogoPeliculasImp implements ICatalogoPelicula {
 
     //creamos variable para recorrer el array list. OJO A LA INTERFACE
@@ -30,15 +32,15 @@ public class CatalogoPeliculasImp implements ICatalogoPelicula {
         //Pelicula nuevaPelicula = new Pelicula(nombrePelicula);
         //HAGO TRY CATCH X ESCRIBIR (que puede dar excepción)
         try {
-            if (this.DATOS.existe(nombreCatalogo)){
+            if (this.DATOS.existe(nombreCatalogo)) {
                 this.DATOS.escribir(new Pelicula(nombrePelicula), nombreCatalogo, true);
-            }else{
+            } else {
                 System.out.println("Catálogo no inicializado");
             }
-            
+
         } catch (EscrituraDatosEx ex) {
-             System.out.println("Error lectura desde Catálogo agreagarPelicula");
-             ex.printStackTrace(System.out);
+            System.out.println("Error lectura desde Catálogo agreagarPelicula");
+            ex.printStackTrace(System.out);
             /*Logger.getLogger(CatalogoPeliculasImp.class.getName()).log(Level.SEVERE, null, ex);*/
         }
     }
@@ -61,18 +63,28 @@ public class CatalogoPeliculasImp implements ICatalogoPelicula {
 
     @Override
     public void buscarPelicula(String nombreCatalogo, String buscar) {
-       
-         var archivo = new File(nombreCatalogo);
+        //llamar amétodo que accede desde la capa accso a datos, lo imprime la capa catálogo
+        var archivo = new File(nombreCatalogo);
         try {
             System.out.println(this.DATOS.buscar(nombreCatalogo, buscar));
         } catch (LecturaDatosEx ex) {
-            ex.printStackTrace();
-            System.out.println("Error al buscar el archivo");
+            ex.printStackTrace(System.out);
         }
     }
 
     @Override
     public void iniciarCatalogo(String nombreCatalogo) {
+        try {
+            if (this.DATOS.existe(nombreCatalogo)) { //comprobamos si existe 
+                this.DATOS.borrar(nombreCatalogo);//si existe lo borro
+                this.DATOS.crear(nombreCatalogo);
+            } else {
+                this.DATOS.crear(nombreCatalogo);
+            }
+        }catch (AccesoDatosEx ex){
+            ex.printStackTrace(System.out);
+            System.out.println("Error al inicializar el catálogo de películas (inicializar catalogo CatPeliculas)");
+        }
 
     }
 
