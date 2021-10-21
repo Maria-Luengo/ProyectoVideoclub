@@ -5,6 +5,7 @@ import com.ceep.videoclub.dominio.Pelicula;
 import com.ceep.videoclub.excepciones.AccesoDatosEx;
 import com.ceep.videoclub.excepciones.EscrituraDatosEx;
 import com.ceep.videoclub.excepciones.LecturaDatosEx;
+import java.io.File;
 import java.util.*;
 /*import java.util.logging.Level;
 import java.util.logging.Logger;*/
@@ -60,20 +61,13 @@ public class CatalogoPeliculasImp implements ICatalogoPelicula {
 
     @Override
     public void buscarPelicula(String nombreCatalogo, String buscar) {
-        //Accedo a través de los objetps crados en mi array list
-        List<Pelicula> peliculasALCat = new ArrayList<>();
-        String busqueda = buscar;
+       
+         var archivo = new File(nombreCatalogo);
         try {
-            peliculasALCat = this.DATOS.listar(nombreCatalogo);
-            peliculasALCat.forEach(pelicula -> {
-                if(buscar == pelicula){
-                    System.out.println("pelicula: " + pelicula.getNombre());
-                }
-            });
+            System.out.println(this.DATOS.buscar(nombreCatalogo, buscar));
         } catch (LecturaDatosEx ex) {
-            System.out.println("Error lectura desde Catálogo películasImp");
-            ex.printStackTrace(System.out); //Devuelve los errorez
-            /*Logger.getLogger(CatalogoPeliculasImp.class.getName()).log(Level.SEVERE, null, ex);*/
+            ex.printStackTrace();
+            System.out.println("Error al buscar el archivo");
         }
     }
 

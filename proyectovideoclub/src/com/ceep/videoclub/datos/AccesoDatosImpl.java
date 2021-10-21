@@ -61,27 +61,27 @@ public class AccesoDatosImpl implements IAccesoDatos {
 
     @Override
     public String buscar(String nombreArchivo, String buscar) throws LecturaDatosEx {
-        var archivo = new File(nombreArchivo);
-        List<Pelicula> peliculasArrayList = new ArrayList<>();//para almacenr los obejtos
+         var archivo = new File(nombreArchivo);
+        var resultado = "";
         try {
+            //entrada es el descriptor de lectura
             var entrada = new BufferedReader(new FileReader(archivo));
+            //nos devuelve una linea de nuestro archivo 
             var lectura = entrada.readLine();
-            while (lectura != null) { //hasta null
-                //SI ENCUATRA UNA LÍNEA LO CONVIETE A OBJETO
-                peliculasArrayList.add(new Pelicula(lectura));
-                //avanzamos en la lectura
+            var i = 0;
+            while(!lectura.equalsIgnoreCase(buscar)){
+                i++;
+                // Avanzamos en la lectura
                 lectura = entrada.readLine();
             }
+            resultado = "\nLa pelicula: " + buscar + ", está en la posición "+ i;
             entrada.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace(System.out);
-            throw new LecturaDatosEx("Error de lectura listando las películas (FileNoFound)");
-
-        } catch (IOException e) { //excepciones de E/S (lectura y escritura)
+        } catch (IOException e){
             e.printStackTrace(System.out);
-            throw new LecturaDatosEx("Error de lectura listando las películas (IO)");
         }
-        return buscar;
+        return resultado;
     }
 
     @Override
