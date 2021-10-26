@@ -18,11 +18,12 @@ public class Principal {
         var lectura = new Scanner(System.in);
         while (opcion != 0) {
             System.out.println("Elige una opción: \n"
-                    + "1.- Iniciar cartalgogo\n"
+                    + "1.- Iniciar catalgo\n"
                     + "2.- Agregar pelicula\n"
                     + "3.- Listar peliculas\n"
                     + "4.- Buscar pelicula\n"
-                    + "0.- Salir");
+                    + "0.- Salir\n"
+                    + "Introduce la opcón a elegir:\t");
             opcion = Integer.parseInt(lectura.nextLine());
 
             switch (opcion) {
